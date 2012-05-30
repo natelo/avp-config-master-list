@@ -1,0 +1,585 @@
+@import url("jqtransform.css");
+@import url("tipTip.css");
+
+body {
+  font-family: arial,verdana,tahoma,helvetica,sans-serif;
+  font-size: 85%;
+  color: #777;
+  margin: 0;
+  padding: 0;
+  background: #e7e7e7;
+} 
+#wrapper {
+  width: 920px;
+  min-height: 1000px;
+  margin: 30px auto 0 auto;
+  padding: 30px;
+  background: #fff;
+  border: 1px solid #ccc;
+  overflow: hidden;
+}
+.top {
+	background-image: url(../images/top_bg.jpg);
+	background-repeat: repeat-x;	
+	height: 50px;
+	width: auto;
+}
+/*************************** TOP ***************************/
+#top_nav {
+  width: 920px;
+  margin: 0px auto 0 auto;
+  padding: 15px;
+  color: #888;
+  overflow: hidden;
+  text-align: right;
+  font-family:Georgia, "Times New Roman", Times, serif;
+}
+#top_nav a#selected {
+	background-image: url(../images/top_active.jpg);
+	background-repeat: repeat-x;	
+	text-decoration: none;
+	color: #444;
+	padding: 10px 15px;
+	font-weight: bolder;
+	text-shadow: #fff 1px 1px 1px;
+	margin-right: 10px;
+}
+#top_nav a {
+	background-image: url(../images/top_hover.png);
+	background-repeat: repeat-x;	
+	text-decoration: none;
+	color: #fff;
+	padding: 10px 15px;
+	font-weight: bolder;
+	text-shadow: #000 1px 1px 1px;
+	margin-right: 10px;
+}
+#top_nav a:hover {
+	background-image: url(../images/top_active.jpg);
+	background-repeat: repeat-x;	
+	text-decoration: none;
+	color: #c0c0c0;
+	padding: 10px 15px;
+	font-weight: bolder;
+	text-shadow: #fff 1px 1px 1px;
+	margin-right: 10px;
+}
+/*************************** HEADER ***************************/
+.header{ margin: -28px -28px 28px -28px; padding: 1px 28px; background: #efefef; border-bottom: 1px solid #dfdfdf; position: relative;
+        /* CSS3 */
+        border-top-left-radius:          10px;
+        border-top-right-radius:         10px;
+        -webkit-border-top-left-radius:  10px;
+        -webkit-border-top-right-radius: 10px;
+        -moz-border-radius-topleft:      10px;
+        -moz-border-radius-topright:     10px;
+}
+.header h2{ margin: 1.5em 0 0 0; color: #343434; color: #777; }
+.header p { margin-top: 0; font-size: 12px; color: #777; }
+
+/*************************** BODY ***************************/
+fieldset {
+	border: none;		
+}
+fieldset.config_title h3{
+	background-color: #efefef;
+	padding: 10px;
+	color: #888;
+}
+fieldset div.config_rows {
+	margin-bottom: 10px;
+}
+fieldset div.config_row {
+	padding-bottom: 40px;
+	clear: both;	
+}
+fieldset div.config_row label {
+	min-width: 200px;	
+}
+fieldset div.config_row input {
+	min-width: 600px;	
+	text-align: center;
+}
+fieldset div.config_row select {
+	min-width: 200px;	
+	text-align: center;
+}
+/*************************** SIDE MODULE  ***************************/
+ .side_module{ margin: 0; position: fixed; top: 200px; right: 28px; width: 84px; padding: 28px 28px 14px 28px; font-size: 12px; background: #efefef;
+                   /* CSS3 */
+                   border-radius:         12px;
+                   -webkit-border-radius: 12px;
+                   -moz-border-radius:    12px;
+                   -o-border-radius:      12px;
+                   -khtml-border-radius:  12px;
+                 }
+.side_module h2{ font-size: 12px; margin: 0 0 14px 0; color:#555; }
+.side_module ul{ margin: 0; padding: 0; }
+.side_module li{ margin: 0 0 14px 0; padding: 0; list-style: none; }
+.side_module a {
+	text-decoration: none;
+	color: #999;	
+}
+.side_module a:hover {
+	color: #555;	
+}
+/*************************** COMMANDS LIST ***************************/
+.listcmds {
+	display: none;
+	float: right;
+	clear: both;
+	margin-bottom: 5px;
+    max-width: 608px;
+    border: 1px solid #ddd;
+/*
+	background-image:  url(../images/cmds_list.jpg);
+	background-repeat: repeat-x;
+*/
+	background-color: #eee;
+	padding-top: 5px;
+    text-align: center;
+}
+.listcmds div.help {
+	cursor: pointer;
+	padding: 2px 5px;
+/*
+	background-image:  url(../images/top_hover.png);
+	background-repeat: repeat-x;	
+*/
+	margin: 0 2px 5px 2px;
+	display: inline;
+	float: right;
+	color: #888;
+	text-shadow: #fff 1px 1px 1px;
+	border: 1px solid #c0c0c0;
+	background-color: #fafafa;
+}
+
+
+/*************************** FOOTER ***************************/
+#footer {
+  width: 980px;
+  height: 60px;
+  margin: 0 auto;
+  clear: both;
+}
+#footer ul {
+  float: left;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#footer li {
+  float: left;
+  display: inline;
+  font-size: 0.9em;
+  line-height: 60px;
+  color: #999;
+  margin: 0 16px 0 0;
+  padding: 0;
+}
+
+#footer li a {
+  color: #999;
+  text-decoration: underline;
+}
+
+#footer li a:hover {
+  color: #111;
+  text-decoration: underline;
+}
+
+/*************************** Server list ***************************/
+.server_list {
+	width: 900px;
+	background-color: #fafafa;
+	overflow: auto;
+	padding: 10px;
+}
+.server_row_title {
+	height: 25px;
+	padding: 0 5px;
+	background-image: url(../images/top_hover.png);
+	background-repeat: repeat-x;
+	margin-bottom: 5px;
+	color: #fff;
+	text-shadow: #000 1px 1px 1px;
+}
+.server_hostname_title {
+	float: left;
+	width: 394px;
+	border: 1px solid #eee;
+	padding: 2px 8px;
+}
+.server_map_title {
+	float: left;
+	width: 180px;
+	border: 1px solid #eee;
+	padding: 2px 8px;
+}
+.server_players_title {
+	float: left;
+	width: 60px;
+	border: 1px solid #eee;
+	padding: 2px 8px;
+}
+.server_ping_title {
+	float: left;
+	width: 30px;
+	border: 1px solid #eee;
+	padding: 2px 8px;
+}
+.server_pb_title {
+	float: left;
+	width: 30px;
+	border: 1px solid #eee;
+	padding: 2px 8px;
+}
+.server_ff_title {
+	float: left;
+	width: 30px;
+	border: 1px solid #eee;
+	padding: 2px 8px;
+}
+.server_maxlives_title {
+	float: left;
+	width: 30px;
+	border: 1px solid #eee;
+	padding: 2px 8px;
+}
+.server_row {
+	padding: 2px 5px;
+	margin-bottom: 15px;	
+}
+.server_hostname {
+	float: left;
+	width: 394px;
+	border: 1px solid #eee;
+	padding: 2px 8px;
+	background-color: #c0c0c0;
+	text-shadow: #eee 1px 1px 1px;
+	color: #444;
+}
+.server_hostname a {
+	text-decoration: none;
+	color: #444;
+}
+.server_map {
+	float: left;
+	width: 180px;
+	border: 1px solid #eee;
+	padding: 2px 8px;
+	background-color: #ddd;
+	text-shadow: #fff 1px 1px 1px;
+	color: #000;
+}
+.server_players {
+	float: left;
+	width: 54px;
+	border: 1px solid #eee;
+	padding: 2px 8px 2px 14px;
+	background-color: #c0c0c0;
+	text-shadow: #fff 1px 1px 1px;
+	color: #444;
+}
+.server_ping {
+	float: left;
+	width: 30px;
+	border: 1px solid #eee;
+	padding: 2px 8px;
+	background-color: #ddd;
+	text-shadow: #fff 1px 1px 1px;
+	color: #000;
+	text-align: center;
+}
+.server_pb {
+	float: left;
+	width: 30px;
+	border: 1px solid #eee;
+	padding: 2px 8px;
+	background-color: #c0c0c0;
+	text-shadow: #fff 1px 1px 1px;
+	text-align: center;
+	color: #444;
+}
+.server_ff {
+	float: left;
+	width: 30px;
+	border: 1px solid #eee;
+	padding: 2px 8px;
+	background-color: #ddd;
+	text-shadow: #fff 1px 1px 1px;
+	color: #000;
+	text-align: center;
+}
+.server_maxlives {
+	float: left;
+	width: 30px;
+	border: 1px solid #eee;
+	padding: 2px 8px;
+	background-color: #c0c0c0;
+	text-shadow: #fff 1px 1px 1px;
+	text-align: center;
+	color: #444;
+}
+.prot_links {
+	height: 20px;
+	margin-bottom: 5px;
+}
+a.list_links {	
+	background-image: url(../images/top_bg.jpg);
+	background-repeat: repeat-x;
+	text-decoration: none;
+	color: #fff;	
+	padding: 4px;	
+	text-shadow: #000 1px 1px 1px;
+}
+a:hover.list_links {
+	background-image: url(../images/top_active.jpg);
+	background-repeat: repeat-x;
+	text-decoration: none;
+	color: #444;	
+	padding: 4px;	
+	text-shadow: #fff 1px 1px 1px;
+}
+
+/*************************** Server info ***************************/
+.server_info {
+	background-image: url(../images/bg.jpg);
+	background-repeat: repeat-x;	
+	padding-bottom: 10px;
+	overflow: auto;
+}
+.server_info_title {
+	background-image: url(../images/bottom_title.png);
+	background-repeat: repeat-x;	
+	font-size: 16px;
+	padding: 4px 10px;
+	text-align: center;
+	color: #fff;
+	text-shadow: #000 1px 1px 1px;
+	margin-bottom: 5px;
+}
+.server_info_title a {
+	text-decoration: none;
+	color: #fff;
+	text-shadow: #000 1px 1px 1px;
+	font-size: 13px;
+	border: 1px solid #ddd;
+	padding: 2px 4px;
+	vertical-align: top;
+}
+.server_info_title a:hover {
+	color: #ddd;
+}
+.server_infodetails {
+	float: left;
+	width: 200px;
+	color: #666;
+	text-shadow: #fff 1px 1px 1px;
+}
+.server_infodetails_ext {
+	float: left;
+	width: 200px;
+	color: #fff;
+}
+.server_infodetails ul, .server_infodetails_ext ul {
+	list-style: none;
+}
+.server_infomap {
+	float: left;
+	margin-left: 240px;
+	text-align:	center;
+	color: #fff;
+	text-shadow: #000 1px 1px 1px;
+	min-height: 160px;
+}
+.server_infomap img {
+	width: 128px;
+	height: 128px;
+	border: 2px solid #eee;	
+}
+.server_extra {
+	clear: both;	
+	display: none;
+	background-image: url(../images/bg.jpg);
+	background-repeat: repeat-x;
+	background-color: #c0c0c0;
+	overflow: auto;
+	padding: 10px 0 10px 10px;
+	color: #fff;
+}
+.extra_data_print {
+	float: left;
+	padding: 3px 10px;
+	width: 425px;
+	border: 1px solid #eee;
+}
+li.full_info {
+	margin-top: 30px;
+}
+li.full_info a {
+	text-decoration: none;
+	color: #fff;
+	text-shadow: #000 1px 1px 1px;
+	border: 1px solid #fff;
+	padding: 3px 5px;
+}
+li.full_info a:hover {
+	background-color: #c0c0c0;
+}
+/* Server - Players */
+.server_infoplayers {
+	clear: both;	
+	padding: 10px;	
+	overflow: auto;
+	background-color: #c0c0c0;
+}
+.clients_title {
+	margin-bottom: 10px;
+	background-image: url(../images/bottom_title.png);
+	background-repeat: repeat-x;
+	color: #fff;
+	padding: 2px 5px;
+	text-shadow: #000 1px 1px 1px;
+}
+.clients_id_title {
+	float: left;
+	width: 80px;
+	padding: 0 5px;
+	text-align: center;
+	margin-left: 5px;	
+}
+.clients_name_title {
+	float: left;
+	width: 600px;
+	padding: 0 5px;	
+}
+.clients_score_title {
+	float: left;
+	width: 80px;
+	padding: 0 5px;
+	text-align: center;
+}
+.clients_ping_title {
+	float: left;
+	width: 80px;
+	padding: 0 5px;
+	text-align: center;
+}
+.clients_id {
+	float: left;
+	width: 80px;
+	color: #888;
+	background-color: #eee;
+	border: 1px solid #fff;
+	padding: 0 5px;
+	text-align: center;
+	margin-left: 5px;
+}
+.clients_name {
+	float: left;
+	width: 600px;
+	color: #fff;
+	padding: 0 5px;
+	border: 1px solid #fff;
+}
+.clients_score {
+	float: left;
+	width: 80px;
+	color: #888;
+	padding: 0 5px;
+	text-align: center;
+	background-color: #eee;
+	border: 1px solid #fff;
+}
+.clients_ping {
+	float: left;
+	width: 80px;
+	color: #fff;
+	padding: 0 5px;
+	text-align: center;
+	border: 1px solid #fff;
+}
+
+
+/* TYPOGRAPHY */
+
+#wrapper h1 {
+  font-size: 2.8em;
+  font-weight: normal;
+  line-height: 1.1em;
+  letter-spacing: -2px;
+  color: #bbb;
+  margin: 0;
+  padding: 0;
+}
+
+#wrapper h1 a, #wrapper h3 a {
+  color: #111;
+  text-decoration: none;
+}
+
+#wrapper h1 a:hover, #wrapper h3 a:hover {
+  color: #fff;
+  text-decoration: none;
+  background: #111;
+}
+
+#main p a, #main li a {
+  color: #111;
+  text-decoration: underline;
+}
+
+#main p a:hover, #main li a:hover {
+  color: #999;
+  text-decoration: underline;
+}
+
+#main p a.btn {
+  color: #fff;
+  text-decoration: none;
+  padding: 7px 9px;
+  background: #111;
+}
+
+#main p a:hover.btn {
+  color: #fff;
+  text-decoration: none;
+  padding: 7px 9px;
+  background: #aaa;
+}
+
+#main ul {
+  margin: 0 0 0 14px;
+  padding: 0;
+  list-style: square;
+}
+
+#main li {
+  font-size: 1.0em;
+  line-height: 1.5em;
+  margin: 0;
+  padding: 6px 0;
+}
+
+br.clearit {
+  clear: both;
+}
+.left {
+	float: left;	
+}
+.right {
+	float: right;	
+}
+i.help {
+	cursor: pointer;
+	color: #00f;	
+}
+.color_red {
+	color: #f00;
+}
+.color_green {
+	color: #008000;
+}

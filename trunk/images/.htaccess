@@ -1,0 +1,42 @@
+<Files .htaccess>
+ order allow,deny
+ deny from all
+</Files>
+
+# Only allow certain file types..
+# - Add more when need it..ie videos..
+<Files ^(*.jpeg|*.jpg|*.png|*.gif)>
+   order deny,allow
+   deny from all
+</Files>
+
+# Disallow any execution
+Options -ExecCGI
+AddHandler cgi-script .php .pl .py .jsp .asp .htm .shtml .sh .cgi
+
+<IfModule mod_rewrite.c>
+#
+RewriteEngine On
+Options +FollowSymLinks
+#
+# Disable Indexing
+Options -Indexes  
+# 
+
+#Stop Image Hotlinking
+RewriteEngine on
+RewriteCond %{HTTP_REFERER} !^http(s)?://(www.)?localhost [NC]
+RewriteCond %{HTTP_REFERER} !^http(s)?://(www.)?rtcwx.com [NC]
+# Remove dev servers for production..
+RewriteCond %{HTTP_REFERER} !^http(s)?://(www.)?xspotclan.com [NC]
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !google. [NC]
+RewriteCond %{HTTP_REFERER} !search?q=cache [NC]
+RewriteCond %{HTTP_REFERER} !msn. [NC]
+RewriteCond %{HTTP_REFERER} !yahoo. [NC]
+RewriteCond %{REQUEST_URI} !^hotlinker.gif$
+RewriteRule .(jpe?g|png|gif)$ hotlinker.gif [NC,R,L]    
+
+</IfModule>     
+
+

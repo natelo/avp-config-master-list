@@ -1,0 +1,5 @@
+/* jqtransform.css */
+*:first-child+html button.jqTransformButton[type]{width: 1;} /* IE7 */
+
+/* Browse */
+* html .browse{ position: absolute; } /* IE6 */
