@@ -1,0 +1,126 @@
+<Files .htaccess>
+ order allow,deny
+ deny from all
+</Files>
+
+<IfModule mod_rewrite.c>
+#
+RewriteEngine On
+Options +FollowSymLinks
+#
+
+######## SEO ########
+# Strip PHP extension 
+RewriteCond %{REQUEST_URI} ^(.*[^/])/?$
+RewriteCond %{DOCUMENT_ROOT}%1.php -f
+RewriteRule .+ %1.php [QSA,L]
+# SEO  
+
+# Deals with trailing slash issue    
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f               
+RewriteCond %{REQUEST_URI} !(\.[a-zA-Z0-9]{1,5}|/)$    
+RewriteRule ^home$ index.php [L]    
+
+## I know there's bunch of various ways how to deal with this- including routing all to index and breaking to arrays,
+## but I simply don't like aspects and problems I have to deal with along the way later on...so I choose a way I feel
+## most comfortable with. General idea anyway is to extend script with plugins while core stays intact. 
+## So if anyone is adding whole new sections to a script simply copy a line under and modify it-
+## just copy/paste any line and rename the rule to point to your new section.. 
+
+## Dynamic
+#RewriteRule ^home/ index.php [QSA,L] 
+## Static
+RewriteRule ^home/([a-zA-Z0-9_-]*)/?([a-zA-Z0-9.:_=-]*) index.php?a=$1&b=$2  [QSA,L]
+RewriteRule ^version/([a-zA-Z0-9._-]*)/?([a-zA-Z0-9_=-]*) index.php?a=$1&b=$2  [QSA,L]
+
+
+######## GENERAL ########
+# Deny access to anything in a subfolder except php fopen
+#RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^/]+)/.*\ HTTP [NC]
+#RewriteRule .* - [F,L]
+
+# No access to subfolders
+#RewriteRule ^core/ - [F] 
+
+# Custom error pages
+ErrorDocument 400 /views/errors/index.php?a=400
+ErrorDocument 403 /views/errors/index.php?a=403
+ErrorDocument 404 /views/errors/index.php?a=404
+ErrorDocument 500 /views/errors/index.php?a=500
+
+####### SECURITY RELATED ########
+RewriteCond %{QUERY_STRING} proc/self/environ [OR]
+# Block out any script trying to base64_encode or base64_decode data within the URL
+RewriteCond %{QUERY_STRING} base64_(en|de)code[^(]*\([^)]*\) [OR]
+# Block out any script that includes a <script> tag in URL
+RewriteCond %{QUERY_STRING} (<|%3C)([^s]*s)+cript.*(>|%3E) [NC,OR]
+# Block out any script trying to set a PHP GLOBALS variable via URL
+RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+# Block out any script trying to modify a _REQUEST variable via URL
+RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
+# Return 403 Forbidden header and show the content of the root homepage
+RewriteRule .* index.php [F]
+
+########## Begin - Common hacking tools and bandwidth hoggers block
+## By SigSiu.net and @nikosdion.
+## WARNING: This will will disallow running CRON jobs using wget.
+# The following rules are for common hacking tools:
+SetEnvIf user-agent "Indy Library" stayout=1
+SetEnvIf user-agent "libwww-perl" stayout=1
+SetEnvIf user-agent "Wget" stayout=1
+# The following rules are for bandwidth-hogging download tools
+SetEnvIf user-agent "Download Demon" stayout=1
+SetEnvIf user-agent "GetRight" stayout=1
+SetEnvIf user-agent "GetWeb!" stayout=1
+SetEnvIf user-agent "Go!Zilla" stayout=1
+SetEnvIf user-agent "Go-Ahead-Got-It" stayout=1
+SetEnvIf user-agent "GrabNet" stayout=1
+SetEnvIf user-agent "TurnitinBot" stayout=1
+# This line denies access to all of the above tools
+deny from env=stayout
+
+## Disallow PHP Easter Eggs (can be used in fingerprinting attacks to determine
+## your PHP version). See http://www.0php.com/php_easter_egg.php and
+## http://osvdb.org/12184 for more information
+RewriteCond %{QUERY_STRING} PHP[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12} [NC]
+RewriteRule .* - [F]
+
+## Disallow access to htaccess.txt, configuration.php, configuration.php-dist and php.ini
+RewriteRule ^(htaccess\.txt|configuration\.php(-dist)?|php\.ini)$ - [F]
+
+## SQLi first line of defense, thanks to Radek Suski (SigSiu.net) @
+## http://www.sigsiu.net/presentations/fortifying_your_joomla_website.html
+## May cause problems on legitimate requests
+RewriteCond %{QUERY_STRING} concat[^\(]*\( [NC,OR]
+RewriteCond %{QUERY_STRING} union([^s]*s)+elect[^\(]*\( [NC,OR]
+RewriteCond %{QUERY_STRING} union([^a]*a)+ll([^s]*s)+elect [NC]
+RewriteRule .* - [F]
+
+########## Begin - File injection protection, by SigSiu.net
+RewriteCond %{REQUEST_METHOD} GET
+RewriteCond %{QUERY_STRING} [a-z0-9_]=http:// [NC]
+RewriteRule .* - [F]
+########## End - File injection protection    
+
+########## Begin - Basic antispam Filter, by SigSiu.net
+## I removed some common words, tweak to your liking
+## This code uses PCRE and works only with Apache 2.x. 
+## This code will NOT work with Apache 1.x servers.
+RewriteCond %{QUERY_STRING} \b(ambien|blue\spill|cialis|cocaine|ejaculation|erectile)\b [NC,OR]
+RewriteCond %{QUERY_STRING} \b(erections|hoodia|huronriveracres|impotence|levitra|libido)\b [NC,OR]
+RewriteCond %{QUERY_STRING} \b(lipitor|phentermin|pro[sz]ac|sandyauer|tramadol|troyhamby)\b [NC,OR]
+RewriteCond %{QUERY_STRING} \b(ultram|unicauca|valium|viagra|vicodin|xanax|ypxaieo)\b [NC]
+## Note: The final RewriteCond must NOT use the [OR] flag.
+RewriteRule .* - [F]
+########## End - Basic antispam Filter, by SigSiu.net
+# 
+</IfModule>  
+
+#Gzip
+<ifmodule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css application/x-javascript application/javascript text/javascript
+</ifmodule>
+#End Gzip   
+
+
